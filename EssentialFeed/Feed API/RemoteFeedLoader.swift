@@ -25,7 +25,10 @@ public final class RemoteFeedLoader {
     }
     
     public func load(completion: @escaping (FeedResult) -> Void) {
-        client.get(from: url) { result in
+        client.get(from: url) { [weak self] result in
+            
+            // prevent completion execution after deallocation:
+            guard self != nil else { return }
             
             switch result {
             case let .success((data, response)):
