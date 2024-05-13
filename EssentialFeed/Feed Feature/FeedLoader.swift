@@ -7,11 +7,7 @@
 
 import Foundation
 
-//public typealias LoadFeedResult<Error: Swift.Error> = Result<[FeedItem], Error>
-public enum LoadFeedResult {
-    case success([FeedItem])
-    case failure(Error)
-}
+public typealias LoadFeedResult = Result<[FeedItem], Error>
 
 public protocol FeedLoader {
     
