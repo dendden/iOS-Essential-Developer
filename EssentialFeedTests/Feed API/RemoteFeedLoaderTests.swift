@@ -119,12 +119,6 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     // MARK: - Factory
     
-    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance, "Instance \(instance.debugDescription) should have been deallocated - potential memory leak!", file: file, line: line)
-        }
-    }
-    
     private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #filePath, line: UInt = #line) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
         
         let client = HTTPClientSpy()
