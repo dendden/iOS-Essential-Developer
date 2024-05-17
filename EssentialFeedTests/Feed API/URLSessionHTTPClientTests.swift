@@ -33,7 +33,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
         
         let url = URL(string: "https://any-url.com")!
         let error = NSError(domain: "any error", code: 1)
-        URLProtocolStub.stub(url: url, withData: nil, response: nil, error: error)
+        URLProtocolStub.stub(withData: nil, response: nil, error: error)
         let sut = URLSessionHTTPClient()
         
         let exp = expectation(description: "Wait for completion")
@@ -63,10 +63,10 @@ final class URLSessionHTTPClientTests: XCTestCase {
             let error: Error?
         }
         
-        private static var stubs = [URL: Stub]()
+        private static var stub: Stub?
         
-        static func stub(url: URL, withData data: Data?, response: URLResponse?, error: Error?) {
-            stubs[url] = Stub(data: data, response: response, error: error)
+        static func stub(withData data: Data?, response: URLResponse?, error: Error?) {
+            stub = Stub(data: data, response: response, error: error)
         }
         
         static func startInterceptingRequests() {
@@ -75,16 +75,10 @@ final class URLSessionHTTPClientTests: XCTestCase {
         
         static func stopInterceptingRequests() {
             URLProtocol.unregisterClass(URLProtocolStub.self)
-            stubs = [:]
+            stub = nil
         }
         
-        override class func canInit(with request: URLRequest) -> Bool {
-            
-            guard let url = request.url else { return false }
-            
-            // need static class reference because canInit() is called before instance exists
-            return URLProtocolStub.stubs[url] != nil
-        }
+        override class func canInit(with request: URLRequest) -> Bool { true }
         
         override class func canonicalRequest(for request: URLRequest) -> URLRequest {
             request
@@ -92,20 +86,15 @@ final class URLSessionHTTPClientTests: XCTestCase {
         
         override func startLoading() {
             
-            guard
-                let url = request.url,
-                let stub = URLProtocolStub.stubs[url]
-            else { return }
-            
-            if let data = stub.data {
+            if let data = URLProtocolStub.stub?.data {
                 client?.urlProtocol(self, didLoad: data)
             }
             
-            if let response = stub.response {
+            if let response = URLProtocolStub.stub?.response {
                 client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
             }
             
-            if let error = stub.error {
+            if let error = URLProtocolStub.stub?.error {
                 client?.urlProtocol(self, didFailWithError: error)
             }
             
