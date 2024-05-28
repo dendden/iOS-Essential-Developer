@@ -9,17 +9,6 @@ import XCTest
 import EssentialFeed
 
 final class EssentialFeedAPIEndToEndTests: XCTestCase {
-    
-    func demo() {
-        let cache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024)
-        let configuration = URLSessionConfiguration.default
-        configuration.urlCache = cache
-        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        let session = URLSession(configuration: configuration)
-        
-        let url = URL(string: "http://any-url.com")!
-        let request = URLRequest(url: url, cachePolicy: .returnCacheDataDontLoad, timeoutInterval: 30)
-    }
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
         
@@ -49,7 +38,7 @@ final class EssentialFeedAPIEndToEndTests: XCTestCase {
             XCTFail("Invalid test API feed url", file: file, line: line)
             return nil
         }
-        let client = URLSessionHTTPClient()
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteFeedLoader(url: testServerURL, client: client)
         
         trackForMemoryLeaks(client, file: file, line: line)
