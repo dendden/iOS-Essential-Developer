@@ -10,4 +10,5 @@ import XCTest
 extension XCTestCase {
     
     func anyURL() -> URL { URL(string: "https://any-url.com")! }
+    func anyNSError() -> NSError { NSError(domain: "any error", code: 1) }
 }
