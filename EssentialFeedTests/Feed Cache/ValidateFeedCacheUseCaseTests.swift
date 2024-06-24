@@ -6,13 +6,23 @@
 //
 
 import XCTest
-import EssentialFeed
+import EssentialFeed 
 
 class ValidateFeedCacheUseCaseTests: XCTestCase {
     
     func test_init_doesNotMessageStoreUponCreation() {
         
         XCTAssertEqual(makeSUT().store.receivedMessages, [])
+    }
+    
+    func test_validateCache_deletesCacheOnRetrievalError() {
+        
+        let (sut, store) = makeSUT()
+        
+        sut.validateCache()
+        store.completeRetrieval(with: anyNSError())
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedFeed])
     }
     
     
