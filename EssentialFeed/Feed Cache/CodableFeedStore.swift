@@ -37,7 +37,9 @@ public class CodableFeedStore: FeedStore {
         }
     }
     
-    private let queue = DispatchQueue(label: "\(CodableFeedStore.self)Queue", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "\(CodableFeedStore.self)Queue",
+                                      qos: .userInitiated,
+                                      attributes: .concurrent)
     
     private let storeURL: URL
     
@@ -72,7 +74,7 @@ public class CodableFeedStore: FeedStore {
         
         let storeURL = self.storeURL
         
-        queue.async {
+        queue.async(flags: .barrier) {
             
             do {
                 let encoder = JSONEncoder()
@@ -91,7 +93,7 @@ public class CodableFeedStore: FeedStore {
         
         let storeURL = self.storeURL
         
-        queue.async {
+        queue.async(flags: .barrier) {
             
             guard FileManager.default.fileExists(atPath: storeURL.path) else {
                 return completion(nil)
