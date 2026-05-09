@@ -18,10 +18,25 @@ public final class CoreDataFeedStore: FeedStore {
         context = container.newBackgroundContext()
     }
     
+    public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
+        
+        perform { context in
+            do {
+                let managedCache = try ManagedCache.newUniqueInstance(in: context)
+                managedCache.timestamp = timestamp
+                managedCache.feed = ManagedFeedImage.images(from: feed, in: context)
+                
+                try context.save()
+                completion(nil)
+            } catch {
+                completion(error)
+            }
+        }
+    }
+    
     public func retrieve(completion: @escaping RetrievalCompletion) {
         
-        let context = self.context
-        context.perform {
+        perform { context in
             do {
                 if let cache = try ManagedCache.find(in: context) {
                     completion(.found(
@@ -41,8 +56,7 @@ public final class CoreDataFeedStore: FeedStore {
     
     public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         
-        let context = self.context
-        context.perform {
+        perform { context in
             do {
                 try ManagedCache.find(in: context).map(context.delete).map(context.save)
                 completion(nil)
@@ -52,21 +66,10 @@ public final class CoreDataFeedStore: FeedStore {
         }
     }
     
-    public func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
+    private func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
         
         let context = self.context
-        context.perform {
-            do {
-                let managedCache = try ManagedCache.newUniqueInstance(in: context)
-                managedCache.timestamp = timestamp
-                managedCache.feed = ManagedFeedImage.images(from: feed, in: context)
-                
-                try context.save()
-                completion(nil)
-            } catch {
-                completion(error)
-            }
-        }
+        context.perform { action(context) }
     }
 }
 
