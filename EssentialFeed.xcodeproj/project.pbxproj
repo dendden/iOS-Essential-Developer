@@ -160,15 +160,31 @@
 		E46CC9662C0E34A800CE6ADE /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
+				E47131462FAFCED70011BDA2 /* Infrastructure */,
 				E46CC9672C0E34E900CE6ADE /* LocalFeedLoader.swift */,
 				E46CC9692C0E376800CE6ADE /* FeedStore.swift */,
 				E47D6A472C1EB2AE00EB63A0 /* LocalFeedImage.swift */,
 				E4D957DB2C3D143900386BC6 /* FeedCachePolicy.swift */,
 				E480ABDB2CCF54A0004E93C6 /* CodableFeedStore.swift */,
+			);
+			path = "Feed Cache";
+			sourceTree = "<group>";
+		};
+		E47131462FAFCED70011BDA2 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				E47131472FAFCEE20011BDA2 /* CoreData */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		E47131472FAFCEE20011BDA2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
 				E4AA89DE2CE5B3A700265D33 /* CoreDataFeedStore.swift */,
 				E4AA89E22CE7055A00265D33 /* FeedStore.xcdatamodeld */,
 			);
-			path = "Feed Cache";
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		E47D6A4B2C20162400EB63A0 /* Helpers */ = {
