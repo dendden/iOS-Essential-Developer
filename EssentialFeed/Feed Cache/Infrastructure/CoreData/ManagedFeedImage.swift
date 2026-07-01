@@ -8,7 +8,7 @@
 import CoreData
 
 @objc(ManagedFeedImage)
-internal class ManagedFeedImage: NSManagedObject {
+class ManagedFeedImage: NSManagedObject {
     
     @NSManaged public var id: UUID
     @NSManaged public var imageDescription: String?
