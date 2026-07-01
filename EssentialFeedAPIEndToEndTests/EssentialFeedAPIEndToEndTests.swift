@@ -32,7 +32,7 @@ final class EssentialFeedAPIEndToEndTests: XCTestCase {
     
     // MARK: - Factory
     
-    private func getFeedResult(file: StaticString = #filePath, line: UInt = #line) -> LoadFeedResult? {
+    private func getFeedResult(file: StaticString = #filePath, line: UInt = #line) -> FeedLoader.Result? {
         guard let testServerURL = URL(string: "https://essentialdeveloper.com/feed-case-study/test-api/feed")
         else {
             XCTFail("Invalid test API feed url", file: file, line: line)
@@ -46,7 +46,7 @@ final class EssentialFeedAPIEndToEndTests: XCTestCase {
         
         let exp = expectation(description: "Wait for load completion")
         
-        var receivedResult: LoadFeedResult?
+        var receivedResult: FeedLoader.Result?
         
         loader.load { result in
             receivedResult = result
