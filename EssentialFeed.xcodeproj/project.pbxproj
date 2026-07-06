@@ -76,13 +76,20 @@
 			);
 			target = E41AB82F2FBCDDAA007A7AB5 /* EssentialFeedCacheIntegrationTests */;
 		};
+		E44E96F22FFC073600989462 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Helpers/XCTestCase+MemoryLeakTracking.swift",
+			);
+			target = E4030F002FF92D0A00A5E722 /* EssentialFeediOSTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E4030EFA2FF92D0A00A5E722 /* EssentialFeediOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeediOS; sourceTree = "<group>"; };
 		E4030F052FF92D0A00A5E722 /* EssentialFeediOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeediOSTests; sourceTree = "<group>"; };
 		E44E965C2FFB906C00989462 /* EssentialFeed */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeed; sourceTree = "<group>"; };
-		E44E96822FFB907A00989462 /* EssentialFeedTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E44E96962FFB907B00989462 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E44E96972FFB907B00989462 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedTests; sourceTree = "<group>"; };
+		E44E96822FFB907A00989462 /* EssentialFeedTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E44E96962FFB907B00989462 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E44E96972FFB907B00989462 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E44E96F22FFC073600989462 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedTests; sourceTree = "<group>"; };
 		E44E96992FFB908900989462 /* EssentialFeedAPIEndToEndTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedAPIEndToEndTests; sourceTree = "<group>"; };
 		E44E969C2FFB908900989462 /* EssentialFeedCacheIntegrationTests_ */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialFeedCacheIntegrationTests_; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
