@@ -1,8 +1,8 @@
 {
   "configurations" : [
     {
-      "id" : "0311C079-4526-4C85-A7BE-24B2D3B8EB54",
-      "name" : "Test Scheme Action",
+      "id" : "90E5F917-1EBB-49D6-828B-13AB5F9B375A",
+      "name" : "Configuration 1",
       "options" : {
 
       }
@@ -22,13 +22,7 @@
   },
   "testTargets" : [
     {
-      "target" : {
-        "containerPath" : "container:EssentialFeed.xcodeproj",
-        "identifier" : "E4FE0C782BE7768000987D16",
-        "name" : "EssentialFeedTests"
-      }
-    },
-    {
+      "parallelizable" : false,
       "target" : {
         "containerPath" : "container:EssentialFeed.xcodeproj",
         "identifier" : "E44E69572BF87E4700A79ACB",
